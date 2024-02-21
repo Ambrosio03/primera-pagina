@@ -18,20 +18,18 @@ window.addEventListener('click', function(e){
     }
 });
 document.addEventListener('DOMContentLoaded', function() {
-    // Obtener todos los enlaces de productos
+    
     var productoLinks = document.querySelectorAll('.producto-link');
   
-    // Iterar sobre cada enlace de producto
+    
     productoLinks.forEach(function(link) {
-      // Agregar evento clic a cada enlace
+      
       link.addEventListener('click', function(event) {
-        // Prevenir el comportamiento predeterminado del enlace
+        
         event.preventDefault();
         
-        // Obtener la URL de destino del enlace
-        var destino = this.getAttribute('href');
         
-        // Redireccionar a la página de detalles del producto
+        var destino = this.getAttribute('href');
         window.location.href = destino;
       });
     });
