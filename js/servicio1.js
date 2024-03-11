@@ -5,3 +5,5 @@ function redirectToPage1() {
 function redirectToPage2() {
     window.location.href = "servicio2.html";
 }
+
+
