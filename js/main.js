@@ -10,30 +10,43 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  function addCarrito() {
-    var precioElement = document.querySelector('.precio');
-    var precioTexto = precioElement.textContent;
-    var precio = parseInt(precioTexto);
-    if (!isNaN(precio)) {
-        var carrito = localStorage.getItem('carrito');
-        if (!carrito) {
-            carrito = []; 
+  function addCarrito(nombreProducto, precioProducto) {
+    var carrito = localStorage.getItem(nombreProducto);
+
+    // Verificar si el producto ya existe en el carrito
+    if (carrito) {
+        // Si el producto ya existe, sumamos el precio al valor existente
+        var precioActual = parseInt(carrito);
+        if (!isNaN(precioActual)) {
+            var nuevoPrecio = precioActual + precioProducto;
+            localStorage.setItem(nombreProducto, nuevoPrecio.toString());
         } else {
-            carrito = JSON.parse(carrito);
+            console.error('El precio almacenado no es un número válido.');
         }
-        carrito.push(precio);
-        localStorage.setItem('carrito', JSON.stringify(carrito));
-        alert('El artículo se ha añadido al carrito.');
-
-        var total = carrito.reduce(function (acc, currentValue) {
-          return acc + currentValue;
-      }, 0);
-      console.log("Total del carrito:", total);
-
-        document.getElementById("total").textContent = "Total del carrito: " + total;
     } else {
-        alert('No se pudo agregar el artículo al carrito. El precio no es válido.');
+        // Si el producto no existe, lo añadimos con su precio
+        localStorage.setItem(nombreProducto, precioProducto.toString());
     }
+
+    alert('El artículo se ha añadido al carrito.');
+
+    // Actualizar el total del carrito
+    mostrarTotalCarrito();
+}
+
+function mostrarTotalCarrito() {
+    var total = 0;
+    // Recorrer todos los elementos del localStorage y sumar los precios
+    for (var i = 0; i < localStorage.length; i++) {
+        var clave = localStorage.key(i);
+        var valor = parseInt(localStorage.getItem(clave));
+        if (!isNaN(valor)) {
+            total += valor;
+        }
+    }
+
+    // Mostrar el total en el elemento con el id "total"
+    document.getElementById("total").textContent = "Total del carrito: " + total;
 }
 
 
@@ -53,5 +66,8 @@ function mostrarTotal() {
   var total = calcularTotal();
   document.getElementById("total").textContent = "Total del carrito: " + total;
 }
+
+
+
 
   

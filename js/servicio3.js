@@ -5,3 +5,8 @@ function redirectToPage1() {
 function redirectToPage2() {
     window.location.href = "servicio4.html";
 }
+
+function agregarAlCarrito() {
+    
+    addCarrito("Servicio de Desarrollo Apps", 200); 
+}

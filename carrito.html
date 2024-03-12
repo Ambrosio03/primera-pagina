@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carrito de Compras</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    #cart {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+
+    #cart p {
+        margin: 5px 0;
+    }
+
+    #cart p:first-child {
+        font-weight: bold;
+    }
+
+    #cart p:last-child {
+        margin-bottom: 0;
+    }
+
+    #total {
+        text-align: right;
+        font-weight: bold;
+    }
+    .borrar-button {
+        margin-left: 10px;
+    }
+</style>
+</head>
+<body>
+    <h1>Carrito de Compras</h1>
+    <div id="cart">
+    </div>
+    <p id="total"></p>
+    <button class="borrar-button" onclick="borrarCarrito()">Vaciar Carrito</button>
+
+    <script>
+        // Función para mostrar el contenido del carrito
+        function mostrarCarrito() {
+            var cart = document.getElementById('cart');
+            var totalParagraph = document.getElementById('total');
+            cart.innerHTML = ''; // Limpiar el contenido actual del carrito
+
+            // Obtener todas las claves del localStorage
+            var keys = Object.keys(localStorage);
+
+            if (keys.length === 0) {
+                cart.innerHTML = '<p>El carrito está vacío.</p>';
+                return;
+            }
+
+            var total = 0;
+
+            // Recorrer todas las claves y mostrarlas en el carrito
+            keys.forEach(function(key) {
+                var value = localStorage.getItem(key);
+                cart.innerHTML += '<p>' + key + ': ' + value + '</p>';
+                total += parseInt(value); // Sumar al total
+            });
+
+            // Mostrar el total del carrito
+            totalParagraph.textContent = 'Total: ' + total;
+        }
+        function borrarCarrito() {
+            localStorage.clear(); // Borrar todos los items del localStorage
+            mostrarCarrito(); // Volver a mostrar el carrito (que ahora estará vacío)
+        }
+
+        // Llamar a la función para mostrar el carrito cuando se cargue la página
+        mostrarCarrito();
+    </script>
+</body>
+</html>

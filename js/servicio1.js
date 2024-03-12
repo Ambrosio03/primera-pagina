@@ -6,4 +6,7 @@ function redirectToPage2() {
     window.location.href = "servicio2.html";
 }
 
-
+function agregarAlCarrito() {
+    
+    addCarrito("Servicio de Desarrollo Web", 200); 
+}

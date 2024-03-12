@@ -5,3 +5,8 @@ function redirectToPage1() {
 function redirectToPage2() {
     window.location.href = "index.html";
 }
+
+function agregarAlCarrito() {
+    
+    addCarrito("Servicio de Seguridad Informática", 500); 
+}

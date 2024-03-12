@@ -5,3 +5,8 @@ function redirectToPage1() {
 function redirectToPage2() {
     window.location.href = "servicio3.html";
 }
+
+function agregarAlCarrito() {
+    
+    addCarrito("Servicio de Diseño Gráfico", 200); 
+}
